@@ -1,59 +1,64 @@
-# Welcome to your Expo app 👋
+# Nostroots mobile app.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Getting started
 
-## Get started
+First, run `pnpm i`.
 
-1. Install watchman (or equivalent on *nix)
+The fastest way to get started is using Expo go:
 
-   ```bash
-   brew install watchman
-   ```
+In `nr-app`, run `pnpm run start` and choose Expo Go. You can try
+starting an emulator or simulator from here if you have it
+installed. Alternatively, install the Expo Go app on your mobile
+device and scan the QR code.
 
-2. Use nvm to set the correct node version. Make sure you have the appropriate version of node installed (`nvm i`).
+If you want to use a development build, you can switch to that by
+pressing `s`. Open an emulator or simulator with this build using the
+commands available.
 
-   ```bash
-   nvm use
-   ```
+## Run a development build
 
-3. Enable pnpm
+You will want to run a development build on an emulator/simulator on your laptop. Run the correct command for your platform:
 
-   ```bash
-   corepack enable pnpm
-   ```
+```
+eas build:run --profile development --platform android --latest # android
+eas build:run --platform ios --profile simulator --latest # ios
+```
 
-4. Install dependencies
+NOTE: The following error means that the builds on eas have expired. You can log into GitHub, go to [this page](https://github.com/Trustroots/nostroots/actions/workflows/eas-build.yaml), click "Run workflow", and choose your.
 
-   ```bash
-   pnpm install
-   ```
+```
+Artifacts for the latest build have expired and are no longer available, or this is not a simulator/emulator build.
+    Error: build:run command failed.
+```
 
-5. Start the app
+You can also use your physical phone. For Android, you
+can use an existing build from
+https://expo.dev/accounts/nostroots/projects/nr-app/builds/ . For iOS,
+you'd have to register your device first using [this link](https://expo.dev/register-device/2e489efb-3f93-453c-99b0-4567492e6bda).
 
-   ```bash
-   pnpm start
-   ```
+## Preview builds for testing
 
-(If you get a `too many open files` error, `rm -rf node_modules; npm install` will [fix](https://github.com/Trustroots/nostroots/issues/30) this, funny enough.)
+We're generating preview builds for android for testing. To create a new preview build, run the "Build in EAS Cloud" GitHub action with `android-preview`. To get the download url for the last created build, run `eas build:list --platform android --build-profile preview --json --non-interactive --status finished --limit 1 | jq '.[0]'.artifacts.buildUrl -r` locally.
 
-### View the app
+To push an update to the people running the preview build, run `eas update --channel preview --message "mymessage"`.
 
-You cannot (currently) view the app in the web. The maps package is not supported on web. The easiest option is to install an app called Expo Go into your phone. Then you can scan the QR code that was output in the terminal from the `pnpm start` command and the app will load onto your phone.
+### Local network
 
-This requires that your phone and computer are on the same network, and that your phone can load the app from your computer.
+For Expo Go to work on a physical phone they need to be connected to
+the same local network. Using a VPN on the development laptop and/or
+on the phone can cause issues with this.
 
-You can also install Android Studio or XCode and then load the app in a simulator. That is beyond the scope of this readme, but [the expo docs](https://docs.expo.dev/get-started/set-up-your-environment/) are a good place to start.
+### Android
 
-## Learn more
+Android Studio seems bloated but it's a good way to get a working
+Android emulator.
 
-To learn more about developing your project with Expo, look at the following resources:
+macOS notes:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- `brew install android-studio`
+- use `~/Library/Android`
 
-## Join the community
+### iOS
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+iOS development only works if you're running macOS and you need to
+install XCode.

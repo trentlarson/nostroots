@@ -1,25 +1,39 @@
 {
   "expo": {
-    "name": "nr-app",
+    "name": "Nostroots",
     "slug": "nr-app",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/nostroots-300x300.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/nostroots-300x300.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "org.trustroots.nostroots",
+      "config": {
+        "googleMapsApiKey": "AIzaSyDw0KhR3qlPsireu68RvGXmh4nccIqnEQM"
+      },
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/nostroots-300x300.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "org.trustroots.nostroots",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCr1ZxZlVQNI_u7FYfPkjgvZv79UeaPFYQ"
+        }
+      },
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "bundler": "metro",
@@ -27,24 +41,38 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-font",
+      "expo-secure-store",
+      [
+        "@sentry/react-native/expo",
+        {
+          "organization": "trustroots-foundation-fo",
+          "project": "react-native",
+          "url": "https://sentry.io/"
+        }
+      ],
+      "expo-web-browser"
     ],
     "experiments": {
-      "typedRoutes": true
+      "typedRoutes": true,
+      "tsconfigPaths": true
     },
     "extra": {
       "router": {
         "origin": false
       },
       "eas": {
-        "projectId": "0147b304-d2cd-4e24-a237-da8bd5f3e4f3"
+        "projectId": "a6c7b2e0-f036-44a3-b57c-d05b9d383c30"
       }
     },
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
+    "newArchEnabled": true,
     "updates": {
-      "url": "https://u.expo.dev/0147b304-d2cd-4e24-a237-da8bd5f3e4f3"
-    }
+      "url": "https://u.expo.dev/a6c7b2e0-f036-44a3-b57c-d05b9d383c30"
+    },
+    "owner": "nostroots"
   }
 }

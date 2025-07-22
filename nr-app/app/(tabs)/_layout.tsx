@@ -4,9 +4,14 @@ import React from "react";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { useAppSelector } from "@/redux/hooks";
+import { settingsSelectors } from "@/redux/slices/settings.slice";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const areTestFeaturesEnabled = useAppSelector(
+    settingsSelectors.selectAreTestFeaturesEnabled,
+  );
 
   return (
     <Tabs
@@ -18,37 +23,47 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
+          title: "Map",
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? "map" : "map-outline"} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="list"
+        options={{
+          title: "List",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? "home" : "home-outline"}
+              name={focused ? "list" : "list-outline"}
               color={color}
             />
           ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="settings"
         options={{
-          title: "Explore",
+          title: "Settings",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? "code-slash" : "code-slash-outline"}
+              name={focused ? "settings" : "settings-outline"}
               color={color}
             />
           ),
         }}
       />
       <Tabs.Screen
-        name="testing"
+        name="connect"
         options={{
-          title: "Test",
+          title: "Connect",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? "code-slash" : "code-slash-outline"}
+              name={focused ? "log-in" : "log-in-outline"}
               color={color}
             />
           ),
+          href: areTestFeaturesEnabled ? "/connect" : null,
         }}
       />
     </Tabs>
